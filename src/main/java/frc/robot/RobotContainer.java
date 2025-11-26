@@ -5,17 +5,13 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
-
-
-
-
-
+import frc.robot.commands.BlueAuto;
+import frc.robot.commands.RedAuto;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Intake;
-//import frc.robot.subsystems.ExampleSubsystem;
-import edu.wpi.first.networktables.GenericEntry;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -30,6 +26,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
+  private SendableChooser<Command> m_auto = new SendableChooser<>();
   private final Drive m_drive = new Drive();
   private final Intake m_intake = new Intake();
 
@@ -43,6 +40,9 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
+    m_auto.setDefaultOption("Blue Auto",new BlueAuto(m_drive, m_intake));
+    m_auto.addOption("Red Auto",new RedAuto());
+    SmartDashboard.putData("Auto Chooser", m_auto);
     configureBindings();
   }
   
@@ -81,6 +81,9 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
+  public Command getAutonomousCommand() {
+    return m_auto.getSelected();
+  }
   
 }
 
