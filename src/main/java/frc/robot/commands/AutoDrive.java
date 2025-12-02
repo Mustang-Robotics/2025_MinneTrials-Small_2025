@@ -22,8 +22,9 @@ public class AutoDrive extends Command{
         m_drive.arcadeDriveCommand(
             m_y, m_x);        
     }
-
+    
     @Override
-    public void 
-
+    public boolean isFinished() {
+        return true;
+    }
 }
