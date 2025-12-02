@@ -18,8 +18,12 @@ public class AutoDrive extends Command{
     }
 
     @Override
-    public void execute(){
+    public void initialize(){
         m_drive.arcadeDriveCommand(
-            m_y, m_x);
+            m_y, m_x);        
     }
+
+    @Override
+    public void 
+
 }
