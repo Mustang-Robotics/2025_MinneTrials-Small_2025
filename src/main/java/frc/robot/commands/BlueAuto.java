@@ -13,7 +13,7 @@ public class BlueAuto extends SequentialCommandGroup {
     public BlueAuto(Drive drive, Intake intake, ADIS16448_IMU m_gyro, PIDController m_PID){
         addCommands(
             new TurnToAngle(drive, .5, 0, m_PID, m_gyro).withTimeout(2.2),
-            new TurnToAngle(drive,0,  -90, m_PID, m_gyro).withTimeout(2),
+            new TurnToAngle(drive,0,  -90, m_PID, m_gyro).withTimeout(3),
             new TurnToAngle(drive, .5, -90, m_PID, m_gyro).withTimeout(.7),
             new ParallelCommandGroup(new AutoDrive(drive, 0,.0),
                 new ShootCommand(intake, .6))

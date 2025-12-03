@@ -26,7 +26,14 @@ public class TurnToAngle extends Command{
 
     @Override
     public void execute(){
-        m_drive.arcadeDrive(m_fwd, -m_PID.calculate(m_gyro.getAngle(), m_angle));
+        double pid = -m_PID.calculate(m_gyro.getAngle(), m_angle);
+        m_PID.setTolerance(3);
+        if(pid < -0.6){
+            pid = -0.6;
+        }else if(pid > 0.6){
+            pid = 0.6;
+        }
+        m_drive.arcadeDrive(m_fwd, pid);
     }
 
 

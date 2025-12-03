@@ -31,7 +31,7 @@ public class RobotContainer {
   private SendableChooser<Command> m_auto = new SendableChooser<>();
   private final Drive m_drive = new Drive();
   private final Intake m_intake = new Intake();
-  PIDController m_PID = new PIDController(0.007, 0.002, 0);
+  PIDController m_PID = new PIDController(0.1, 0, 0);
 
   private final double speedVariable = 0.85;
   //private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
