@@ -11,9 +11,9 @@ import java.util.function.DoubleSupplier;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
-
+import edu.wpi.first.wpilibj.ADIS16448_IMU;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -24,6 +24,7 @@ public class Drive extends SubsystemBase{
     private final WPI_VictorSPX bLeft = new WPI_VictorSPX(4);
     public final WPI_VictorSPX fRight = new WPI_VictorSPX(3);
     private final WPI_VictorSPX bRight = new WPI_VictorSPX(0);
+    public final ADIS16448_IMU m_gyro = new ADIS16448_IMU();
 
     private DifferentialDrive m_drive = new DifferentialDrive(bLeft, bRight);
     
@@ -40,6 +41,8 @@ public class Drive extends SubsystemBase{
       
       bRight.setInverted(true);
       fRight.setInverted(InvertType.FollowMaster);
+      
+
     }
    
   
@@ -58,7 +61,14 @@ public class Drive extends SubsystemBase{
   public void arcadeDrive(double fwd, double rot) {
           
       m_drive.arcadeDrive(-fwd, rot);
-}}
+}
+
+@Override
+public void periodic(){
+  SmartDashboard.putNumber("angle", m_gyro.getAngle());
+}
+
+}
 
 
  

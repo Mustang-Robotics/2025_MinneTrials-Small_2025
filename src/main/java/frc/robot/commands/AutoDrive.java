@@ -7,6 +7,8 @@ public class AutoDrive extends Command{
     Drive m_drive;
     double m_x;
     double m_y;
+    double m_time;
+
     public AutoDrive(Drive drive, double fwd, double rot){
         m_drive = drive;
         m_x = rot;
@@ -20,5 +22,5 @@ public class AutoDrive extends Command{
         m_drive.arcadeDrive(
             m_y, m_x);        
     }
-    
+
 }

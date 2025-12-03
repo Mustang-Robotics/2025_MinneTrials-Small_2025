@@ -7,8 +7,10 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.BlueAuto;
 import frc.robot.commands.RedAuto;
+import frc.robot.commands.ShootCommand;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Intake;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -29,6 +31,7 @@ public class RobotContainer {
   private SendableChooser<Command> m_auto = new SendableChooser<>();
   private final Drive m_drive = new Drive();
   private final Intake m_intake = new Intake();
+  PIDController m_PID = new PIDController(0.007, 0.002, 0);
 
   private final double speedVariable = 0.85;
   //private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
@@ -40,10 +43,11 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
-    m_auto.setDefaultOption("Blue Auto",new BlueAuto(m_drive, m_intake));
-    m_auto.addOption("Red Auto",new RedAuto(m_drive, m_intake));
+    m_auto.setDefaultOption("Blue Auto",new BlueAuto(m_drive, m_intake, m_drive.m_gyro, m_PID).withTimeout(7).andThen(new ShootCommand(m_intake, 0)));
+    m_auto.addOption("Red Auto",new RedAuto(m_drive, m_intake, m_drive.m_gyro, m_PID).withTimeout(7).andThen(new ShootCommand(m_intake, 0)));
     SmartDashboard.putData("Auto Chooser", m_auto);
     configureBindings();
+    
   }
   
   /**
