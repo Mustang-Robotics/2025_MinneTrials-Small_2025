@@ -52,6 +52,12 @@ public class Drive extends SubsystemBase{
     
     return run(() -> m_drive.arcadeDrive(fwd.getAsDouble(), rot.getAsDouble()))
         .withName("arcadeDrive");
+
+  }
+
+  public void arcadeDrive(double fwd, double rot) {
+          
+      m_drive.arcadeDrive(-fwd, rot);
 }}
 
 

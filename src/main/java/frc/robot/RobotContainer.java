@@ -41,7 +41,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     m_auto.setDefaultOption("Blue Auto",new BlueAuto(m_drive, m_intake));
-    m_auto.addOption("Red Auto",new RedAuto());
+    m_auto.addOption("Red Auto",new RedAuto(m_drive, m_intake));
     SmartDashboard.putData("Auto Chooser", m_auto);
     configureBindings();
   }
